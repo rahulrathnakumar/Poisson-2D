@@ -326,24 +326,15 @@ subroutine numeric(m, extent, image, npes, itercount, q, left, right, up, down, 
 !*************************************************************************************************
 !	CONVERGENCE CHECK - LOCAL MAXIMA
 	if(mod(itercount,q) .EQ. 0) then
-!		print*, itercount, "Inside convergence check"
 		n_error=maxval(abs(unew-u))
-!		print*, "ProcID:", rank
-!		print*, n_error
 	endif
 	u=unew
-!	print*, "ProcID:", rank
-!	do j=0, extent
-!		do k=0,extent
-!			print*, unew(j,k)
-!		enddo
-!	enddo
 	return
 end subroutine numeric
 
 subroutine validation(m, extent, uanalytic, validation_error, u, x, y, image)
 !DESCRIPTION:
-!
+!Validation for the case of all boundaries at 0.
 integer, intent(in) :: m, extent
 integer, intent(inout) :: image
 real(DOUBLE), intent(inout) :: uanalytic(0:extent,0:extent), validation_error[*]
